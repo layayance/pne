@@ -1,0 +1,47 @@
+/* =========================
+   FOOTER
+   Pied de page du site
+   ========================= */
+
+.footer {
+  background: var(--pne-blue);
+  color: white;
+  padding-top: 60px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+
+  h2,
+  h3 {
+    margin-top: 0;
+    color: var(--pne-gold);
+  }
+
+  p {
+    color: #dce4f2;
+    line-height: 1.7;
+    margin: 8px 0;
+  }
+}
+
+.footer-bottom {
+  margin-top: 45px;
+  padding: 22px 6%;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+  color: #cdd7e8;
+  font-size: 14px;
+}
+
+/* =========================
+   RESPONSIVE FOOTER
+   ========================= */
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}

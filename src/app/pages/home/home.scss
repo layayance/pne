@@ -1,0 +1,23 @@
+/* =========================
+   HERO SECTION
+   Grande section d'accueil
+   ========================= */
+
+.hero {
+  min-height: calc(100vh - 76px); // Prend presque toute la hauteur écran
+  padding: 80px 6%; // Espace intérieur haut/bas + côtés
+
+  display: grid; // Permet de séparer texte + carte
+  grid-template-columns: 1.3fr 0.7fr; // Texte plus large que la carte
+  align-items: center;
+  gap: 50px;
+
+  color: white;
+
+  // Dégradé sombre + image de fond
+  background:
+    linear-gradient(rgba(8, 22, 47, 0.88), rgba(8, 22, 47, 0.9)), url('/images/logo_pne.jpeg');
+
+  background-size: cover;
+  background-position: center;
+}

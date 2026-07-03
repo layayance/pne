@@ -1,1 +1,16 @@
-<p>navbar works!</p>
+<header class="navbar">
+  <a routerLink="/" class="logo" aria-label="Accueil Paris Nord Élite">
+    <span>PNE</span>
+    <strong>Paris Nord Élite</strong>
+  </a>
+
+  <nav class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+      >Accueil</a
+    >
+    <a routerLink="/qui-sommes-nous" routerLinkActive="active">Qui sommes-nous</a>
+    <a routerLink="/actions" routerLinkActive="active">Actions</a>
+    <a routerLink="/partenaires" routerLinkActive="active">Partenaires</a>
+    <a routerLink="/contact" routerLinkActive="active" class="contact-link">Contact</a>
+  </nav>
+</header>
