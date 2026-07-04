@@ -1,0 +1,165 @@
+/* =========================
+   HERO
+   ========================= */
+
+.page-hero {
+  padding: 100px 0;
+
+  background: linear-gradient(rgba(8, 22, 47, 0.95), rgba(8, 22, 47, 0.9));
+
+  color: white;
+}
+
+/* =========================
+   CARTES
+   ========================= */
+
+.partner-grid {
+  margin-top: 50px;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+.partner-grid article {
+  background: white;
+
+  padding: 35px;
+
+  border-radius: 25px;
+
+  box-shadow: var(--pne-shadow);
+}
+
+.partner-grid span {
+  font-size: 45px;
+}
+
+.partner-grid h3 {
+  margin: 20px 0 15px;
+
+  color: var(--pne-blue);
+}
+
+.partner-grid p {
+  color: var(--pne-text);
+
+  line-height: 1.7;
+}
+
+/* =========================
+   TYPES
+   ========================= */
+
+.partner-types {
+  background: white;
+}
+
+.types-grid {
+  margin-top: 45px;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.types-grid div {
+  background: var(--pne-blue);
+
+  color: white;
+
+  padding: 30px;
+
+  border-radius: 22px;
+
+  text-align: center;
+
+  font-weight: 700;
+}
+
+/* =========================
+   CTA
+   ========================= */
+
+.partner-cta {
+  padding: 90px 0;
+
+  background: var(--pne-cream);
+}
+
+.cta-content {
+  text-align: center;
+
+  background: var(--pne-blue);
+
+  color: white;
+
+  padding: 60px;
+
+  border-radius: 35px;
+}
+
+.cta-content h2 {
+  font-size: 50px;
+
+  margin: 0;
+}
+
+.cta-content p {
+  max-width: 700px;
+
+  margin: 25px auto 35px;
+
+  line-height: 1.8;
+}
+
+.cta-btn {
+  display: inline-block;
+
+  padding: 16px 30px;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+
+  background: var(--pne-gold);
+
+  color: var(--pne-blue);
+
+  font-weight: 800;
+}
+
+/* =========================
+   RESPONSIVE TABLETTE
+   ========================= */
+
+@media (max-width: 900px) {
+  .partner-grid,
+  .types-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* =========================
+   RESPONSIVE MOBILE
+   ========================= */
+
+@media (max-width: 650px) {
+  .partner-grid,
+  .types-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-content {
+    padding: 35px 25px;
+  }
+
+  .cta-content h2 {
+    font-size: 34px;
+  }
+}

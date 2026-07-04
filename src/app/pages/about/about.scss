@@ -1,0 +1,156 @@
+/* =========================
+   PAGE HERO
+   En-tête de la page Qui sommes-nous
+   ========================= */
+
+.page-hero {
+  padding: 90px 0;
+  color: white;
+
+  background:
+    linear-gradient(135deg, rgba(8, 22, 47, 0.96), rgba(16, 38, 77, 0.9)),
+    radial-gradient(circle at top right, rgba(214, 168, 79, 0.25), transparent 35%);
+
+  h1 {
+    max-width: 900px;
+    margin: 0;
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1;
+    letter-spacing: -1.5px;
+  }
+
+  p {
+    max-width: 760px;
+    margin-top: 24px;
+    color: #e1e8f5;
+    font-size: 19px;
+    line-height: 1.7;
+  }
+}
+
+/* =========================
+   ABOUT SECTION
+   Bloc texte + carte méthode
+   ========================= */
+
+.about-section {
+  background: var(--pne-cream);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 50px;
+  align-items: start;
+
+  p {
+    color: var(--pne-text);
+    font-size: 18px;
+    line-height: 1.8;
+  }
+}
+
+/* Carte méthode */
+.about-card {
+  padding: 34px;
+  border-radius: 30px;
+  background: white;
+  box-shadow: var(--pne-shadow);
+
+  h3 {
+    margin: 0 0 20px;
+    font-size: 28px;
+    color: var(--pne-blue);
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 14px;
+    color: var(--pne-text);
+    line-height: 1.6;
+    font-weight: 650;
+  }
+}
+
+/* =========================
+   MISSION SECTION
+   Trois piliers de l'association
+   ========================= */
+
+.mission-section {
+  background: white;
+}
+
+.mission-grid {
+  margin-top: 40px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+
+  article {
+    padding: 32px;
+    border-radius: 28px;
+    background: var(--pne-blue);
+    color: white;
+    box-shadow: var(--pne-shadow);
+  }
+
+  span {
+    display: inline-block;
+    margin-bottom: 26px;
+    color: var(--pne-gold);
+    font-weight: 900;
+    font-size: 18px;
+  }
+
+  h3 {
+    margin: 0 0 14px;
+    font-size: 25px;
+    line-height: 1.15;
+  }
+
+  p {
+    margin: 0;
+    color: #dce4f2;
+    line-height: 1.7;
+  }
+}
+
+/* =========================
+   RESPONSIVE TABLETTE
+   ========================= */
+
+@media (max-width: 900px) {
+  .about-grid,
+  .mission-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   RESPONSIVE MOBILE
+   ========================= */
+
+@media (max-width: 640px) {
+  .page-hero {
+    padding: 65px 0;
+
+    h1 {
+      letter-spacing: -1px;
+    }
+
+    p {
+      font-size: 17px;
+    }
+  }
+
+  .about-card,
+  .mission-grid article {
+    padding: 26px;
+  }
+}

@@ -1,0 +1,298 @@
+/* =========================
+   PAGE HERO
+   En-tête premium de contact
+   ========================= */
+
+.page-hero {
+  padding: 95px 0;
+  color: white;
+
+  background:
+    linear-gradient(135deg, rgba(8, 22, 47, 0.96), rgba(16, 38, 77, 0.9)),
+    radial-gradient(circle at top right, rgba(214, 168, 79, 0.28), transparent 35%);
+
+  h1 {
+    max-width: 950px;
+    margin: 0;
+    font-size: clamp(42px, 6vw, 74px);
+    line-height: 1;
+    letter-spacing: -1.5px;
+  }
+
+  p {
+    max-width: 740px;
+    margin-top: 24px;
+    color: #e1e8f5;
+    font-size: 19px;
+    line-height: 1.7;
+  }
+}
+
+/* =========================
+   CONTACT SECTION
+   Infos + formulaire
+   ========================= */
+
+.contact-section {
+  background: var(--pne-cream);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 50px;
+  align-items: start;
+}
+
+/* Cartes infos */
+.info-cards {
+  margin-top: 36px;
+  display: grid;
+  gap: 18px;
+
+  article {
+    padding: 24px;
+    border-radius: 24px;
+    background: white;
+    box-shadow: var(--pne-shadow);
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+
+  span {
+    width: 52px;
+    height: 52px;
+    border-radius: 18px;
+
+    display: grid;
+    place-items: center;
+
+    background: var(--pne-blue);
+    font-size: 24px;
+  }
+
+  h3 {
+    margin: 0 0 5px;
+    color: var(--pne-blue);
+  }
+
+  p {
+    margin: 0;
+    color: var(--pne-text);
+    line-height: 1.5;
+  }
+}
+
+/* =========================
+   FORMULAIRE
+   Carte formulaire premium
+   ========================= */
+
+.contact-form {
+  padding: 36px;
+  border-radius: 32px;
+  background: white;
+  box-shadow: var(--pne-shadow);
+
+  display: grid;
+  gap: 18px;
+
+  h2 {
+    margin: 0 0 10px;
+    color: var(--pne-blue);
+    font-size: 34px;
+  }
+
+  label {
+    display: grid;
+    gap: 8px;
+
+    color: var(--pne-blue);
+    font-weight: 800;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 15px 16px;
+
+    border: 1px solid #d9deea;
+    border-radius: 16px;
+    outline: none;
+
+    font: inherit;
+    color: var(--pne-blue);
+    background: #fafbfe;
+
+    transition: 0.2s ease;
+
+    &:focus {
+      border-color: var(--pne-gold);
+      box-shadow: 0 0 0 4px rgba(214, 168, 79, 0.16);
+      background: white;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  button {
+    margin-top: 8px;
+    padding: 16px 24px;
+
+    border: none;
+    border-radius: 999px;
+
+    background: var(--pne-gold);
+    color: var(--pne-blue);
+
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.25s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.form-note {
+  margin: 0;
+  color: var(--pne-text);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================
+   FAQ
+   Questions fréquentes
+   ========================= */
+
+.faq-section {
+  background: white;
+}
+
+.faq-grid {
+  margin-top: 36px;
+  display: grid;
+  gap: 16px;
+}
+
+details {
+  padding: 24px 26px;
+  border-radius: 24px;
+
+  background: var(--pne-cream);
+  box-shadow: 0 10px 24px rgba(8, 22, 47, 0.06);
+
+  summary {
+    cursor: pointer;
+    color: var(--pne-blue);
+    font-size: 19px;
+    font-weight: 900;
+  }
+
+  p {
+    margin: 16px 0 0;
+    color: var(--pne-text);
+    line-height: 1.7;
+  }
+}
+
+/* =========================
+   CTA FINAL
+   Dernier appel à l'action
+   ========================= */
+
+.contact-cta {
+  padding: 80px 0;
+  background: var(--pne-cream);
+}
+
+.cta-box {
+  padding: 55px;
+  border-radius: 34px;
+
+  text-align: center;
+  color: white;
+
+  background:
+    linear-gradient(135deg, rgba(8, 22, 47, 0.96), rgba(16, 38, 77, 0.94)),
+    radial-gradient(circle at top right, rgba(214, 168, 79, 0.28), transparent 35%);
+
+  box-shadow: var(--pne-shadow);
+
+  h2 {
+    max-width: 760px;
+    margin: 0 auto 18px;
+    font-size: clamp(32px, 5vw, 54px);
+    line-height: 1.05;
+  }
+
+  p {
+    max-width: 740px;
+    margin: 0 auto 28px;
+    color: #e1e8f5;
+    line-height: 1.7;
+    font-size: 18px;
+  }
+
+  a {
+    display: inline-flex;
+    padding: 15px 24px;
+    border-radius: 999px;
+
+    background: var(--pne-gold);
+    color: var(--pne-blue);
+
+    text-decoration: none;
+    font-weight: 900;
+  }
+}
+
+/* =========================
+   RESPONSIVE TABLETTE
+   ========================= */
+
+@media (max-width: 940px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   RESPONSIVE MOBILE
+   ========================= */
+
+@media (max-width: 640px) {
+  .page-hero {
+    padding: 65px 0;
+
+    h1 {
+      letter-spacing: -1px;
+    }
+
+    p {
+      font-size: 17px;
+    }
+  }
+
+  .contact-form,
+  .info-cards article,
+  details {
+    padding: 24px;
+  }
+
+  .info-cards article {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-box {
+    padding: 36px 24px;
+  }
+}

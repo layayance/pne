@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-actions',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './actions.html',
   styleUrl: './actions.scss',
 })
