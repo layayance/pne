@@ -66,11 +66,12 @@
 
       <label>
         Sujet
-        <select>
-          <option>Je veux rejoindre l’association</option>
-          <option>Je souhaite devenir partenaire</option>
-          <option>Je veux proposer une action</option>
-          <option>Demande d’information</option>
+        <select required>
+          <option value="" disabled selected>Sélectionner un sujet</option>
+          <option value="rejoindre">Je veux rejoindre l’association</option>
+          <option value="partenaire">Je souhaite devenir partenaire</option>
+          <option value="action">Je veux proposer une action</option>
+          <option value="information">Demande d’information</option>
         </select>
       </label>
 
@@ -82,8 +83,9 @@
       <button type="button">Envoyer le message</button>
 
       <p class="form-note">
-        Le formulaire est visuel pour le moment. On pourra ensuite le connecter avec Formspree,
-        EmailJS, Whatsapp ou un backend.
+        Le formulaire est visuel pour le moment.
+        <!-- On pourra ensuite le connecter avec Formspree,
+        EmailJS, Whatsapp ou un backend.   -->
       </p>
     </form>
   </div>
