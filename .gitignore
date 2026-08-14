@@ -43,3 +43,10 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 .vercel
+
+/.env
+/.env.local
+/.env.development.local
+/.env.test.local
+/.env.production.local
+/.envrc
