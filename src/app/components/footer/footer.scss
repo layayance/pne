@@ -25,6 +25,15 @@
     line-height: 1.7;
     margin: 8px 0;
   }
+
+  a {
+    color: inherit;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: var(--pne-gold);
+    }
+  }
 }
 
 .footer-bottom {

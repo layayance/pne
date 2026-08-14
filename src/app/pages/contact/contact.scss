@@ -84,6 +84,15 @@
     color: var(--pne-text);
     line-height: 1.5;
   }
+
+  a {
+    color: inherit;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: var(--pne-gold);
+    }
+  }
 }
 
 /* =========================
