@@ -51,22 +51,28 @@
       </div>
     </div>
 
-    <form class="contact-form">
+    <form class="contact-form" (submit)="submitForm($event)">
       <h2>Envoyer un message</h2>
 
       <label>
         Nom complet
-        <input type="text" placeholder="Votre nom" />
+        <input type="text" name="name" autocomplete="name" placeholder="Votre nom" required />
       </label>
 
       <label>
         Email
-        <input type="email" placeholder="votre.email@example.com" />
+        <input
+          type="email"
+          name="email"
+          autocomplete="email"
+          placeholder="votre.email@example.com"
+          required
+        />
       </label>
 
       <label>
         Sujet
-        <select required>
+        <select name="subject" required>
           <option value="" disabled selected>Sélectionner un sujet</option>
           <option value="rejoindre">Je veux rejoindre l’association</option>
           <option value="partenaire">Je souhaite devenir partenaire</option>
@@ -77,17 +83,31 @@
 
       <label>
         Message
-        <textarea rows="5" placeholder="Votre message..."></textarea>
+        <textarea name="message" rows="5" placeholder="Votre message..." required></textarea>
       </label>
 
-      <button type="button">Envoyer le message</button>
+      <input
+        class="form-honeypot"
+        type="text"
+        name="_gotcha"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+      />
 
-      <p class="form-note">
-        Le formulaire est visuel pour le moment. Il n’est pas encore fonctionnel et ne permet pas
-        d’envoyer de message.
-        <!-- On pourra ensuite le connecter avec Formspree,
-        EmailJS, Whatsapp ou un backend.   -->
-      </p>
+      <button type="submit" [disabled]="isSending()">
+        {{ isSending() ? 'Envoi en cours…' : 'Envoyer le message' }}
+      </button>
+
+      @if (submitStatus() === 'success') {
+        <p class="form-status form-status--success" role="status">
+          Merci ! Votre message a bien été envoyé. Nous vous répondrons rapidement.
+        </p>
+      } @else if (submitStatus() === 'error') {
+        <p class="form-status form-status--error" role="alert">
+          Le message n’a pas pu être envoyé. Réessayez ou écrivez-nous directement par email.
+        </p>
+      }
     </form>
   </div>
 </section>
@@ -139,6 +159,6 @@
     <p>
       Paris Nord Élite avance avec celles et ceux qui veulent agir concrètement pour les habitants.
     </p>
-    <a href="parisnordelite@gmail.com">Écrire à l’association</a>
+    <a href="mailto:parisnordelite@gmail.com">Écrire à l’association</a>
   </div>
 </section>
