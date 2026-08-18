@@ -1,0 +1,102 @@
+<section class="admin-page">
+  <div class="container">
+    <header class="admin-header">
+      <div>
+        <p>Administration PNE</p>
+        <h1>Gérer les actions</h1>
+      </div>
+      @if (authenticated()) {
+        <button type="button" class="quiet-button" (click)="logout()">Se déconnecter</button>
+      }
+    </header>
+
+    @if (!actionsService.configured) {
+      <div class="setup-card">
+        <h2>Connexion Supabase à terminer</h2>
+        <p>
+          La page d’administration est prête. Il reste à créer le projet Supabase et à renseigner
+          son URL et sa clé publique une seule fois.
+        </p>
+      </div>
+    } @else if (!authenticated()) {
+      <form class="login-card" [formGroup]="loginForm" (ngSubmit)="login()">
+        <h2>Connexion</h2>
+        <label>
+          Email
+          <input type="email" formControlName="email" autocomplete="email" />
+        </label>
+        <label>
+          Mot de passe
+          <input type="password" formControlName="password" autocomplete="current-password" />
+        </label>
+        <button type="submit">Se connecter</button>
+      </form>
+    } @else {
+      <div class="admin-grid">
+        <form class="editor-card" [formGroup]="actionForm" (ngSubmit)="save()">
+          <h2>{{ editingId() ? 'Modifier l’action' : 'Nouvelle action' }}</h2>
+
+          <label>Titre <input type="text" formControlName="title" /></label>
+          <div class="field-row">
+            <label>Date <input type="date" formControlName="date" /></label>
+            <label>Catégorie <input type="text" formControlName="category" /></label>
+          </div>
+          <label>Résumé <textarea rows="3" formControlName="summary"></textarea></label>
+          <label>Description <textarea rows="6" formControlName="description"></textarea></label>
+
+          <div class="upload-grid">
+            <label class="upload-field">
+              Vidéo
+              <input
+                type="file"
+                accept="video/mp4,video/webm"
+                (change)="uploadMedia($event, 'videoUrl')"
+              />
+              <small>{{ actionForm.controls.videoUrl.value || 'Aucune vidéo' }}</small>
+            </label>
+            <label class="upload-field">
+              Image de couverture
+              <input type="file" accept="image/*" (change)="uploadMedia($event, 'posterUrl')" />
+              <small>{{ actionForm.controls.posterUrl.value || 'Aucune image' }}</small>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" [disabled]="saving()">
+              {{ saving() ? 'Enregistrement…' : 'Publier' }}
+            </button>
+            @if (editingId()) {
+              <button type="button" class="quiet-button" (click)="cancelEdit()">Annuler</button>
+            }
+          </div>
+        </form>
+
+        <section class="published-card">
+          <h2>Actions publiées</h2>
+          <div class="published-list">
+            @for (action of actionsService.actions(); track action.id) {
+              <article>
+                <div>
+                  <small>{{ action.date }} · {{ action.category }}</small>
+                  <h3>{{ action.title }}</h3>
+                </div>
+                <div class="item-actions">
+                  <button type="button" class="quiet-button" (click)="edit(action)">
+                    Modifier
+                  </button>
+                  <button type="button" class="delete-button" (click)="deleteAction(action)">
+                    Supprimer
+                  </button>
+                </div>
+              </article>
+            }
+          </div>
+        </section>
+      </div>
+    }
+
+    @if (feedback()) {
+      <p class="feedback" role="status">{{ feedback() }}</p>
+    }
+  </div>
+</section>

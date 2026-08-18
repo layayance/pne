@@ -13,6 +13,47 @@
   </div>
 </section>
 
+<section class="section latest-section">
+  <div class="container">
+    <p class="section-kicker">Sur le terrain</p>
+    <h2 class="section-title">Nos dernières actions.</h2>
+    <p class="section-subtitle">
+      Retrouvez les initiatives menées par Paris Nord Élite auprès des habitants.
+    </p>
+
+    <div class="latest-list">
+      @for (action of latestActions(); track action.id) {
+        <article class="latest-card">
+          @if (action.videoUrl) {
+            <div class="action-media">
+              <video
+                controls
+                playsinline
+                preload="metadata"
+                [poster]="action.posterUrl || ''"
+                [attr.aria-label]="'Vidéo : ' + action.title"
+              >
+                <source [src]="action.videoUrl" type="video/mp4" />
+                Votre navigateur ne peut pas lire cette vidéo.
+              </video>
+            </div>
+          }
+
+          <div class="action-content">
+            <div class="action-meta">
+              <span>{{ action.category }}</span>
+              <time [attr.datetime]="action.date">{{ action.date | date: 'dd/MM/yyyy' }}</time>
+            </div>
+            <h3>{{ action.title }}</h3>
+            <p class="action-summary">{{ action.summary }}</p>
+            <p>{{ action.description }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
 <!-- =========================
      ACTIONS PRINCIPALES
      Cartes des domaines d'intervention

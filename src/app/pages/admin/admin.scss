@@ -1,0 +1,176 @@
+.admin-page {
+  min-height: calc(100vh - 76px);
+  padding: 64px 0 90px;
+  background: #edf0f5;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 32px;
+
+  p {
+    margin: 0 0 8px;
+    color: #9a6c16;
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    color: var(--pne-blue);
+    font-size: clamp(38px, 6vw, 60px);
+  }
+}
+
+.setup-card,
+.login-card,
+.editor-card,
+.published-card {
+  padding: 32px;
+  border-radius: 26px;
+  background: white;
+  box-shadow: var(--pne-shadow);
+}
+
+.setup-card,
+.login-card {
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+  gap: 26px;
+  align-items: start;
+}
+
+h2 {
+  margin: 0 0 24px;
+  color: var(--pne-blue);
+}
+
+form {
+  display: grid;
+  gap: 18px;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+  color: var(--pne-blue);
+  font-weight: 800;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #d9deea;
+  border-radius: 13px;
+  background: #fafbfe;
+}
+
+.field-row,
+.upload-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.upload-field {
+  padding: 15px;
+  border: 1px dashed #bcc5d5;
+  border-radius: 15px;
+
+  small {
+    overflow: hidden;
+    color: var(--pne-text);
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+button {
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--pne-blue);
+  background: var(--pne-gold);
+  font-weight: 900;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.6;
+  }
+}
+
+.quiet-button {
+  border: 1px solid #cbd2df;
+  background: transparent;
+}
+
+.delete-button {
+  color: #9c2929;
+  background: #fff0f0;
+}
+
+.form-actions,
+.item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.published-list {
+  display: grid;
+  gap: 12px;
+
+  article {
+    display: grid;
+    gap: 15px;
+    padding: 17px;
+    border-radius: 17px;
+    background: var(--pne-cream);
+  }
+
+  small {
+    color: var(--pne-text);
+  }
+
+  h3 {
+    margin: 5px 0 0;
+    color: var(--pne-blue);
+  }
+}
+
+.feedback {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  max-width: 380px;
+  margin: 0;
+  padding: 14px 18px;
+  border-radius: 14px;
+  color: white;
+  background: var(--pne-blue);
+  box-shadow: var(--pne-shadow);
+}
+
+@media (max-width: 840px) {
+  .admin-grid,
+  .field-row,
+  .upload-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-header {
+    align-items: flex-start;
+  }
+}
