@@ -1,18 +1,22 @@
+import { DatePipe } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AssociationAction } from '../../data/action.model';
 import { ActionsService } from '../../services/actions.service';
 import { supabase } from '../../core/supabase.client';
+import { ContactMessagesService } from '../../services/contact-messages.service';
+import { ContactMessage } from '../../data/contact-message.model';
 
 @Component({
   selector: 'app-admin',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, DatePipe],
   templateUrl: './admin.html',
   styleUrl: './admin.scss',
 })
 export class Admin implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
   readonly actionsService = inject(ActionsService);
+  readonly contactMessages = inject(ContactMessagesService);
   readonly authenticated = signal(false);
   readonly saving = signal(false);
   readonly feedback = signal('');
@@ -37,7 +41,7 @@ export class Admin implements OnInit {
     if (!supabase) return;
     const { data } = await supabase.auth.getSession();
     this.authenticated.set(Boolean(data.session));
-    if (data.session) await this.actionsService.loadPublished();
+    if (data.session) await this.loadAdminData();
   }
 
   async login(): Promise<void> {
@@ -52,7 +56,7 @@ export class Admin implements OnInit {
     }
 
     this.authenticated.set(true);
-    await this.actionsService.loadPublished();
+    await this.loadAdminData();
   }
 
   async logout(): Promise<void> {
@@ -122,5 +126,18 @@ export class Admin implements OnInit {
     } finally {
       this.saving.set(false);
     }
+  }
+
+  async markMessageAsRead(message: ContactMessage): Promise<void> {
+    await this.contactMessages.markAsRead(message.id);
+  }
+
+  async deleteMessage(message: ContactMessage): Promise<void> {
+    if (!globalThis.confirm?.(`Supprimer le message de ${message.name} ?`)) return;
+    await this.contactMessages.remove(message.id);
+  }
+
+  private async loadAdminData(): Promise<void> {
+    await Promise.all([this.actionsService.loadPublished(), this.contactMessages.load()]);
   }
 }

@@ -93,6 +93,43 @@
           </div>
         </section>
       </div>
+
+      <section class="messages-card">
+        <div class="messages-heading">
+          <div>
+            <p>Formulaire de contact</p>
+            <h2>Messages reçus</h2>
+          </div>
+          <strong>{{ contactMessages.messages().length }}</strong>
+        </div>
+
+        <div class="messages-list">
+          @for (message of contactMessages.messages(); track message.id) {
+            <article [class.unread]="!message.isRead">
+              <div class="message-meta">
+                <span>{{ message.subject }}</span>
+                <time>{{ message.createdAt | date: 'dd/MM/yyyy à HH:mm' }}</time>
+              </div>
+              <h3>{{ message.name }}</h3>
+              <a [href]="'mailto:' + message.email">{{ message.email }}</a>
+              <p>{{ message.message }}</p>
+              <div class="item-actions">
+                @if (!message.isRead) {
+                  <button type="button" class="quiet-button" (click)="markMessageAsRead(message)">
+                    Marquer comme lu
+                  </button>
+                }
+                <a class="reply-button" [href]="'mailto:' + message.email">Répondre</a>
+                <button type="button" class="delete-button" (click)="deleteMessage(message)">
+                  Supprimer
+                </button>
+              </div>
+            </article>
+          } @empty {
+            <p class="empty-state">Aucun message reçu pour le moment.</p>
+          }
+        </div>
+      </section>
     }
 
     @if (feedback()) {

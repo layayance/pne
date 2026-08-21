@@ -1,0 +1,2 @@
+[functions.notify-contact]
+verify_jwt = true

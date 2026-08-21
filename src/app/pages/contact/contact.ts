@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { ContactMessagesService } from '../../services/contact-messages.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,6 +8,7 @@ import { Component, signal } from '@angular/core';
   styleUrl: './contact.scss',
 })
 export class Contact {
+  private readonly contactMessages = inject(ContactMessagesService);
   readonly isSending = signal(false);
   readonly submitStatus = signal<'idle' | 'success' | 'error'>('idle');
 
@@ -22,15 +24,20 @@ export class Contact {
     this.submitStatus.set('idle');
 
     try {
-      const response = await fetch('https://formspree.io/f/meajznlk', {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' },
-      });
+      const data = new FormData(form);
 
-      if (!response.ok) {
-        throw new Error('Formspree a refusé le message.');
+      if (data.get('_gotcha')) {
+        form.reset();
+        this.submitStatus.set('success');
+        return;
       }
+
+      await this.contactMessages.send({
+        name: String(data.get('name') || ''),
+        email: String(data.get('email') || ''),
+        subject: String(data.get('subject') || ''),
+        message: String(data.get('message') || ''),
+      });
 
       form.reset();
       this.submitStatus.set('success');
