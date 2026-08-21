@@ -13,6 +13,7 @@ export class Contact {
   readonly submitStatus = signal<'idle' | 'success' | 'error'>('idle');
 
   async submitForm(event: SubmitEvent): Promise<void> {
+    event.preventDefault();
     const form = event.currentTarget as HTMLFormElement;
 
     if (!form.checkValidity()) {
