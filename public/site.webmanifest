@@ -1,0 +1,10 @@
+{
+  "name": "Paris Nord Élite",
+  "short_name": "PNE",
+  "description": "Association jeunesse et club de futsal à Paris Nord",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08162f",
+  "theme_color": "#08162f",
+  "lang": "fr"
+}
