@@ -21,6 +21,7 @@ export class Admin implements OnInit {
   readonly saving = signal(false);
   readonly feedback = signal('');
   readonly editingId = signal<string | null>(null);
+  readonly galleryUrls = signal<string[]>([]);
 
   readonly loginForm = this.formBuilder.nonNullable.group({
     email: ['parisnordelite@gmail.com', [Validators.required, Validators.email]],
@@ -75,11 +76,13 @@ export class Admin implements OnInit {
       videoUrl: action.videoUrl || '',
       posterUrl: action.posterUrl || '',
     });
+    this.galleryUrls.set(action.imageUrls || []);
     globalThis.scrollTo?.({ top: 0, behavior: 'smooth' });
   }
 
   cancelEdit(): void {
     this.editingId.set(null);
+    this.galleryUrls.set([]);
     this.actionForm.reset({ category: 'Solidarité locale' });
   }
 
@@ -95,6 +98,7 @@ export class Admin implements OnInit {
       await this.actionsService.save({
         id: this.editingId() || undefined,
         ...this.actionForm.getRawValue(),
+        imageUrls: this.galleryUrls(),
       });
       this.feedback.set('Action enregistrée et publiée.');
       this.cancelEdit();
@@ -103,6 +107,29 @@ export class Admin implements OnInit {
     } finally {
       this.saving.set(false);
     }
+  }
+
+  async uploadGallery(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const files = Array.from(input.files || []);
+    if (!files.length) return;
+
+    this.saving.set(true);
+    this.feedback.set('Ajout des photos en cours…');
+    try {
+      const urls = await Promise.all(files.map((file) => this.actionsService.upload(file, 'images')));
+      this.galleryUrls.update((current) => [...current, ...urls]);
+      this.feedback.set('Photos ajoutées. Enregistrez maintenant l’action.');
+      input.value = '';
+    } catch {
+      this.feedback.set('Une ou plusieurs photos n’ont pas pu être ajoutées.');
+    } finally {
+      this.saving.set(false);
+    }
+  }
+
+  removeGalleryImage(url: string): void {
+    this.galleryUrls.update((current) => current.filter((item) => item !== url));
   }
 
   async deleteAction(action: AssociationAction): Promise<void> {

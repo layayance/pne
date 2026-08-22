@@ -193,6 +193,28 @@ textarea {
   }
 }
 
+.gallery-upload {
+  margin-top: 2px;
+}
+
+.gallery-preview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+
+  div {
+    display: grid;
+    gap: 8px;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+}
+
 button {
   padding: 12px 18px;
   border: 0;

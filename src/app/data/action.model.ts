@@ -7,6 +7,7 @@ export interface AssociationAction {
   description: string;
   videoUrl?: string;
   posterUrl?: string;
+  imageUrls?: string[];
 }
 
 export const INITIAL_ACTIONS: AssociationAction[] = [
@@ -20,5 +21,6 @@ export const INITIAL_ACTIONS: AssociationAction[] = [
       'Paris Nord Élite s’est mobilisée sur le terrain pour apporter une aide concrète et créer un moment de solidarité avec les habitants.',
     videoUrl: '/media/actions/distribution-solidaire-ete-2026.mp4',
     posterUrl: '/media/actions/distribution-solidaire-ete-2026.png',
+    imageUrls: [],
   },
 ];

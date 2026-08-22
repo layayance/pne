@@ -16,7 +16,7 @@ export class ActionsService {
     this.loading.set(true);
     const { data, error } = await supabase
       .from('actions')
-      .select('id,title,date,category,summary,description,video_url,poster_url')
+      .select('id,title,date,category,summary,description,video_url,poster_url,image_urls')
       .eq('published', true)
       .order('date', { ascending: false });
 
@@ -31,6 +31,7 @@ export class ActionsService {
           description: row.description,
           videoUrl: row.video_url || undefined,
           posterUrl: row.poster_url || undefined,
+          imageUrls: row.image_urls || [],
         })),
       );
     }
@@ -49,6 +50,7 @@ export class ActionsService {
       description: input.description,
       video_url: input.videoUrl || null,
       poster_url: input.posterUrl || null,
+      image_urls: input.imageUrls || [],
       published: true,
     };
 

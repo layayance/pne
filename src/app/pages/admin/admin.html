@@ -66,6 +66,25 @@
             </label>
           </div>
 
+          <label class="upload-field gallery-upload">
+            Galerie photos (plusieurs photos possibles)
+            <input type="file" accept="image/*" multiple (change)="uploadGallery($event)" />
+            <small>{{ galleryUrls().length }} photo(s) ajoutée(s)</small>
+          </label>
+
+          @if (galleryUrls().length) {
+            <div class="gallery-preview">
+              @for (url of galleryUrls(); track url) {
+                <div>
+                  <img [src]="url" alt="Photo de la galerie" />
+                  <button type="button" class="delete-button" (click)="removeGalleryImage(url)">
+                    Retirer
+                  </button>
+                </div>
+              }
+            </div>
+          }
+
           <div class="form-actions">
             <button type="submit" [disabled]="saving()">
               {{ saving() ? 'Enregistrement…' : 'Publier' }}

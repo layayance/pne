@@ -81,6 +81,20 @@
   }
 }
 
+.action-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 26px;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    object-fit: cover;
+  }
+}
+
 @media (max-width: 760px) {
   .latest-card {
     grid-template-columns: 1fr;
@@ -88,6 +102,14 @@
 
   .action-content {
     padding: 28px;
+  }
+
+  .action-gallery {
+    grid-template-columns: 1fr;
+
+    img {
+      aspect-ratio: 4 / 3;
+    }
   }
 }
 

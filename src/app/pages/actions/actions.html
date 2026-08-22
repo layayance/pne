@@ -51,6 +51,14 @@
             <h3>{{ action.title }}</h3>
             <p class="action-summary">{{ action.summary }}</p>
             <p>{{ action.description }}</p>
+
+            @if (action.imageUrls?.length) {
+              <div class="action-gallery" [attr.aria-label]="'Photos : ' + action.title">
+                @for (imageUrl of action.imageUrls; track imageUrl) {
+                  <img [src]="imageUrl" [alt]="action.title" loading="lazy" />
+                }
+              </div>
+            }
           </div>
         </article>
       }

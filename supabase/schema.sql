@@ -9,6 +9,7 @@ create table if not exists public.actions (
   description text not null,
   video_url text,
   poster_url text,
+  image_urls text[] not null default '{}',
   published boolean not null default true,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
