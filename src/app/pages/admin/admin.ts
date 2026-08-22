@@ -6,6 +6,8 @@ import { ActionsService } from '../../services/actions.service';
 import { supabase } from '../../core/supabase.client';
 import { ContactMessagesService } from '../../services/contact-messages.service';
 import { ContactMessage } from '../../data/contact-message.model';
+import { MediaLibraryService } from '../../services/media-library.service';
+import { MediaKind, MediaSection } from '../../data/media-item.model';
 
 @Component({
   selector: 'app-admin',
@@ -17,11 +19,13 @@ export class Admin implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
   readonly actionsService = inject(ActionsService);
   readonly contactMessages = inject(ContactMessagesService);
+  readonly mediaLibrary = inject(MediaLibraryService);
   readonly authenticated = signal(false);
   readonly saving = signal(false);
   readonly feedback = signal('');
   readonly editingId = signal<string | null>(null);
   readonly galleryUrls = signal<string[]>([]);
+  readonly mediaFile = signal<File | null>(null);
 
   readonly loginForm = this.formBuilder.nonNullable.group({
     email: ['parisnordelite@gmail.com', [Validators.required, Validators.email]],
@@ -36,6 +40,11 @@ export class Admin implements OnInit {
     description: ['', Validators.required],
     videoUrl: [''],
     posterUrl: [''],
+  });
+
+  readonly mediaForm = this.formBuilder.nonNullable.group({
+    section: ['futsal' as MediaSection, Validators.required],
+    title: ['', Validators.required],
   });
 
   async ngOnInit(): Promise<void> {
@@ -132,6 +141,40 @@ export class Admin implements OnInit {
     this.galleryUrls.update((current) => current.filter((item) => item !== url));
   }
 
+  selectLibraryFile(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.mediaFile.set(input.files?.[0] || null);
+  }
+
+  async addLibraryMedia(): Promise<void> {
+    const file = this.mediaFile();
+    if (!file || this.mediaForm.invalid) {
+      this.feedback.set('Ajoutez un titre et choisissez une photo ou une vidéo.');
+      return;
+    }
+
+    this.saving.set(true);
+    this.feedback.set('Ajout du média en cours…');
+    try {
+      const kind: MediaKind = file.type.startsWith('video/') ? 'video' : 'image';
+      const url = await this.actionsService.upload(file, kind === 'video' ? 'videos' : 'images');
+      const values = this.mediaForm.getRawValue();
+      await this.mediaLibrary.add({ ...values, kind, url });
+      this.mediaForm.reset({ section: values.section, title: '' });
+      this.mediaFile.set(null);
+      this.feedback.set('Média ajouté sur le site.');
+    } catch {
+      this.feedback.set('Impossible d’ajouter ce média.');
+    } finally {
+      this.saving.set(false);
+    }
+  }
+
+  async deleteLibraryMedia(id: string, title: string): Promise<void> {
+    if (!globalThis.confirm?.(`Supprimer « ${title} » de la galerie ?`)) return;
+    await this.mediaLibrary.remove(id);
+  }
+
   async deleteAction(action: AssociationAction): Promise<void> {
     if (!globalThis.confirm?.(`Supprimer « ${action.title} » ?`)) return;
     await this.actionsService.remove(action.id);
@@ -165,6 +208,10 @@ export class Admin implements OnInit {
   }
 
   private async loadAdminData(): Promise<void> {
-    await Promise.all([this.actionsService.loadPublished(), this.contactMessages.load()]);
+    await Promise.all([
+      this.actionsService.loadPublished(),
+      this.contactMessages.load(),
+      this.mediaLibrary.load(),
+    ]);
   }
 }

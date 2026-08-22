@@ -1,5 +1,14 @@
 create extension if not exists "pgcrypto";
 
+create table if not exists public.media_items (
+  id uuid primary key default gen_random_uuid(),
+  section text not null check (section in ('actions', 'futsal', 'partenaires')),
+  title text not null,
+  kind text not null check (kind in ('image', 'video')),
+  url text not null,
+  created_at timestamptz not null default now()
+);
+
 create table if not exists public.actions (
   id uuid primary key default gen_random_uuid(),
   title text not null,

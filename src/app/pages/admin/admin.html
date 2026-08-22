@@ -118,6 +118,53 @@
         </section>
       </div>
 
+      <section class="messages-card media-manager">
+        <div class="messages-heading">
+          <div>
+            <p>Photos et vidéos</p>
+            <h2>Médiathèque du site</h2>
+          </div>
+          <strong>{{ mediaLibrary.items().length }}</strong>
+        </div>
+
+        <form class="media-form" [formGroup]="mediaForm" (ngSubmit)="addLibraryMedia()">
+          <label>
+            Rubrique
+            <select formControlName="section">
+              <option value="actions">Actions</option>
+              <option value="futsal">Futsal</option>
+              <option value="partenaires">Partenaires</option>
+            </select>
+          </label>
+          <label>Titre <input type="text" formControlName="title" /></label>
+          <label class="upload-field">
+            Photo ou vidéo
+            <input type="file" accept="image/*,video/mp4,video/webm" (change)="selectLibraryFile($event)" />
+            <small>{{ mediaFile()?.name || 'Aucun fichier choisi' }}</small>
+          </label>
+          <button type="submit" [disabled]="saving()">Ajouter sur le site</button>
+        </form>
+
+        <div class="library-list">
+          @for (item of mediaLibrary.items(); track item.id) {
+            <article>
+              @if (item.kind === 'video') {
+                <video [src]="item.url" muted></video>
+              } @else {
+                <img [src]="item.url" [alt]="item.title" />
+              }
+              <div>
+                <small>{{ item.section }} · {{ item.kind === 'video' ? 'Vidéo' : 'Photo' }}</small>
+                <h3>{{ item.title }}</h3>
+              </div>
+              <button type="button" class="delete-button" (click)="deleteLibraryMedia(item.id, item.title)">
+                Supprimer
+              </button>
+            </article>
+          }
+        </div>
+      </section>
+
       <section class="messages-card">
         <div class="messages-heading">
           <div>
