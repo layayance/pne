@@ -10,22 +10,36 @@
 
 .latest-card {
   display: grid;
-  grid-template-columns: minmax(260px, 0.72fr) 1.28fr;
+  grid-template-columns: 1fr;
+  align-items: center;
   overflow: hidden;
   border-radius: 30px;
   background: var(--pne-cream);
   box-shadow: var(--pne-shadow);
+
+  &.has-media {
+    grid-template-columns: minmax(320px, 0.85fr) 1.15fr;
+  }
 }
 
 .action-media {
-  min-height: 510px;
+  width: 100%;
+  overflow: hidden;
   background: var(--pne-blue);
 
-  video {
+  video,
+  img {
     width: 100%;
-    height: 100%;
-    max-height: 620px;
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  video {
     object-fit: contain;
+  }
+
+  img {
+    object-fit: cover;
   }
 }
 
@@ -43,6 +57,7 @@
   > p {
     color: var(--pne-text);
     line-height: 1.7;
+    white-space: pre-line;
   }
 
   .action-summary {
@@ -69,14 +84,6 @@
 @media (max-width: 760px) {
   .latest-card {
     grid-template-columns: 1fr;
-  }
-
-  .action-media {
-    min-height: auto;
-
-    video {
-      max-height: 560px;
-    }
   }
 
   .action-content {

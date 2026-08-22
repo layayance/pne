@@ -55,9 +55,14 @@
               <small>{{ actionForm.controls.videoUrl.value || 'Aucune vidéo' }}</small>
             </label>
             <label class="upload-field">
-              Image de couverture
+              Image de couverture (format horizontal conseillé)
               <input type="file" accept="image/*" (change)="uploadMedia($event, 'posterUrl')" />
-              <small>{{ actionForm.controls.posterUrl.value || 'Aucune image' }}</small>
+              <small>
+                {{
+                  actionForm.controls.posterUrl.value ||
+                    'Cette miniature apparaît avant la lecture de la vidéo'
+                }}
+              </small>
             </label>
           </div>
 

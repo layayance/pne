@@ -23,7 +23,7 @@
 
     <div class="latest-list">
       @for (action of latestActions(); track action.id) {
-        <article class="latest-card">
+        <article class="latest-card" [class.has-media]="action.videoUrl || action.posterUrl">
           @if (action.videoUrl) {
             <div class="action-media">
               <video
@@ -36,6 +36,10 @@
                 <source [src]="action.videoUrl" type="video/mp4" />
                 Votre navigateur ne peut pas lire cette vidéo.
               </video>
+            </div>
+          } @else if (action.posterUrl) {
+            <div class="action-media">
+              <img [src]="action.posterUrl" [alt]="action.title" loading="lazy" />
             </div>
           }
 
